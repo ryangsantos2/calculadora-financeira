@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url("https://e1.pxfuel.com/desktop-wallpaper/851/695/desktop-wallpaper-louvre-museum-people-art-louvre.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .calculadora {
+            background-color: rgb(145, 68, 68);
+            border-radius: 20px;
+            height: 400px;
+            width: 300px;
+            margin-left: 500px;
+            border: 10px;
+            border-style: solid;
+            border-color: goldenrod;
+            display: flex;
+
+        }
+
+        .dentro {
+            height: 100px;
+            text-align: center;
+
+        }
+
+        .resultado{
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculadora">
+        <div class="dentro">
+            <h1><b>CALCULADORA FINANCEIRA</b></h1>
+            <b><i>Qual seu gasto anual com a restauração de acervo</i></b>
+            <input id="numerocustos" type="number"  style="width: 200px; height: 30px;">
+            <br>
+            <b><i>Anos de projeção</i></b>
+            <input id="numerosanos" type="number"  style="width: 200px; height: 30px;">
+            <br>
+            <button onclick="calcular()" style="height: 50px; width: 120px;">Mostrar resultados</button>
+            <div id="resultado" class="resultado"></div>
+        </div>
+       
+    </div>
+
+</body>
+</html>
+
+<script>
+    function calcular(){
+        var custoanual= Number(numerocustos.value)
+        var anos= Number(numerosanos.value)
+
+        var media= custoanual/12
+        var semsistema= (custoanual/12)*anos
+
+        resultado.innerHTML=(`Você deixara de gastar R$${semsistema.toFixed(2)} com nosso projeto, no período de ${anos} anos`)
+    }
+</script>
