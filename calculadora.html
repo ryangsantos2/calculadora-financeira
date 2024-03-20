@@ -27,17 +27,21 @@
             border: 10px;
             border-style: solid;
             border-color: goldenrod;
-      
+
 
         }
 
         .dentro {
             height: 100px;
             text-align: center;
+            
 
         }
 
-        
+        .resultado{
+           
+            background-color: brown;
+        }
     </style>
 </head>
 
@@ -46,15 +50,19 @@
     <div class="calculadora">
         <div class="dentro">
             <h1><b>CALCULADORA FINANCEIRA</b></h1>
-            <b><i>Qual seu gasto anual com a restauração de acervo</i></b>
+            <b><i>Qual seu gasto mensal com a restauração de acervo</i></b>
             <input id="numerocustos" type="number" style="width: 200px; height: 30px;">
+            <br>
+            <b><i>Qual seu gasto mensal com manutenção</i></b>
+            <br>
+            <input id="numerorestauracao" type="number" style="width: 200px; height: 30px;">
             <br>
             <b><i>Anos de projeção</i></b>
             <br>
             <input id="numerosanos" type="number" style="width: 200px; height: 30px;">
             <br>
             <button onclick="calcular()" style="height: 50px; width: 120px;">Mostrar resultados</button>
-            <div id="resultado"></div>
+            <div id="resultado" class='resultado'></div>
         </div>
 
     </div>
@@ -65,16 +73,28 @@
 
 <script>
     function calcular() {
-        var custoanual = Number(numerocustos.value)
+        
+        var restauracaomensal = Number(numerocustos.value)
         var anos = Number(numerosanos.value)
+        var manutencaomensal = Number(numerorestauracao.value)
 
-        var media = custoanual / 12
-        var semsistema = (custoanual / 12) * anos
+        var totalmanutencao = manutencaomensal * 12 * anos
+        var totalrestauracao = restauracaomensal * 12 * anos
+        var porcentagemrestauracao= (totalmanutencao/totalrestauracao) *100
+        var porcentagem_economiafinal= 100 - porcentagemrestauracao
+        var economiatotal= totalmanutencao-totalrestauracao
+        var economiaanual=economiatotal/anos 
 
-        if (!custoanual || !anos) {
+
+        if (!restauracaomensal || !anos || !manutencaomensal) {
             resultado.innerHTML = (`Preencha os seus dados  corretamente!`)
         } else {
-            resultado.innerHTML = (`Você deixara de gastar R$${semsistema.toFixed(2)} com nosso projeto, no período de ${anos} anos`)
+            resultado.innerHTML = (`Em ${anos} anos com nosso projeto, o gasto de manutenção geral seria de R$${totalmanutencao.toFixed(2)}, 
+            enquanto o gasto total na restauração do acervo seria de R$${totalrestauracao.toFixed(2)}.<p>
+                A restauração, representaria ${porcentagemrestauracao.toFixed(2)}% do valor geral da manutenção.<p>
+                    Utilizando nosso sistema, a empresa teria como economia o valor de ${porcentagem_economiafinal.toFixed(2)}% anualmente, 
+                    o que equivale a economia de R$${economiatotal} dentro de ${anos} anos.<p>
+                        No total, terá uma economia de R$${economiaanual.toFixed(2)}`)
         }
     }
 </script>
